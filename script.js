@@ -2,6 +2,7 @@ let boton = document.getElementById("buscar");
 let input = document.getElementById("buscadorUser");
 let contenedor = document.getElementById("resultados");
 let usersURL = "https://jsonplaceholder.typicode.com/users";
+let user = null; 
 
 boton.addEventListener("click", function(){
 
@@ -32,7 +33,7 @@ boton.addEventListener("click", function(){
     }
         
     if (usuarioEncontrado) {
-            let user = usuarioEncontrado;
+            user = usuarioEncontrado;
             console.log(id);
             contenedor.innerHTML=`
             <p class="text-start"><strong> ID:</strong></p>
@@ -46,9 +47,49 @@ boton.addEventListener("click", function(){
 
             <p class="text-start"><strong> Email:</strong></p>
             <p class="text-start">${user.email}</p>
+      ` 
+    
+
+       // Crear un elemento de botón
+       var masInfo = document.createElement("button");
+
+       // Configurar el texto y atributos del botón
+       masInfo.innerHTML = "Más información";
+       masInfo.setAttribute("id", "masInfo");
+
+       // Agregar un evento al botón (opcional)
+       masInfo.addEventListener("click", function() {
+        if (user) {
+          contenedor.innerHTML=`
+            <p class="text-start"><strong> ID:</strong></p>
+            <p class="text-start"> ${user.id}</p>
+            <p class="text-start"><strong> Nombre:</strong></p>
+            <p class="text-start">${user.name}</p>
+            <p class="text-start"><strong> Username:</strong></p>
+            <p class="text-start">${user.username}</p>
+            <p class="text-start"><strong> Email:</strong></p>
+            <p class="text-start">${user.email}</p>
+            <p class="text-start"><strong> Dirección:</strong></p>
+            <p class="text-start">${user.address.street}</p>
+            <p class="text-start">${user.address.suite}</p>
+            <p class="text-start">${user.address.city}</p>
+            <p class="text-start">${user.address.zipcode}</p>
+            <p class="text-start"><strong>Geo:</strong></p>
+            <p class="text-start">Latitud: ${user.address.geo.lat}</p>
+            <p class="text-start">Longitud: ${user.address.geo.lng}</p>
+            <p class="text-start"><strong>Teléfono:</strong> ${user.phone}</p>
+            <p class="text-start"><strong>Sitio Web:</strong> ${user.website}</p>
+            <p class="text-start"><strong>Compañía:</strong></p>
+            <p class="text-start">Nombre: ${user.company.name}</p>
+            <p class="text-start">Frase: ${user.company.catchPhrase}</p>
+            <p class="text-start">Bs: ${user.company.bs}</p>
       ` ;
-       // Agrega la información del usuario al contenedor de resultados
-       contenedor.appendChild(usuarioEncontrado);
+    }});
+
+       // Agregar el botón al contenedor
+       contenedor.appendChild(masInfo);
+
+
        
       
         } else{
